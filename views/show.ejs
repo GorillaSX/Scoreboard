@@ -1,0 +1,133 @@
+<% include partials/header %>
+        <div class="ui fixed inverted menu">
+            <div class="ui container">
+                <div class="header item">
+                    <i class="browser icon"></i>ScoreBoard
+                </div>
+            </div>
+        </div>
+        <div class="ui main grid container">
+            <div class="three wide column">
+                <div class="ui raised center aligned segments">
+                    <div class="ui center aligned segment">
+                        <a class="ui violet basic button" id="newbt" href="/scoreboard/new">
+                            New
+                        </a>
+                    </div>
+                    <% var termName = "" %>
+                    <% terms.forEach(function(term){ %>
+                        <div class="ui center aligned segment term">
+                        <% if(id == term.id) {%>
+                        <% termName = term.term %>
+                            <div class="ui fluid buttons">
+                                <a href="/scoreboard/<%=term.id%>" class="ui violet button sevenp"><%=term.term%></a>
+                                <button class="ui icon gray button threep"><i class="edit icon"></i></button>
+                            </div>
+                            <% if(display == false){ %>
+                                <div class="ui center aligned segment termEdit">
+                            <% }else{ %>
+                                <div class="ui center aligned segment termEdit display">
+                            <% } %>
+                                    <div class="ui fluid buttons">
+                                        <button class="ui positive button" id="EditTermName">Edit</button>
+                                        <div class="or"></div>
+                                        <button class="ui button remove">Remove</button>
+                                    </div>
+                            </div>
+                            <% if(display == false){ %>
+                                <div class="ui center aligned segment EditSegment">
+                            <% }else{ %>
+                                <div class="ui center aligned segment EditSegment display">
+                            <% } %>
+                                <form class="ui form" action="/scoreboard/<%=id%>/EditName" method="POST">
+                                    <div class="field">
+                                      <input type="text" placeholder="term" name="term" autofocus>
+                                    </div>
+                                    <% if(error == true){ %>
+                                          <div class="ui red tiny message">
+                                              name is used 
+                                          </div>
+                                    <% } %>
+                                    <div class="field">
+                                      <button class="circular ui violet button" type="submit" name="action" value="submit"><i class="checkmark icon"></i></button>
+                                    </div>
+                                </form>
+                                      <button class="circular ui  button" name="action" id="discard"><i class="remove icon"></i></button>
+                            </div>
+                            <div class="ui mini modal removeTerm">
+                                <i class="close icon"></i>
+                                <div class="header">
+                                    Delete This Term
+                                </div>
+                                <div class="content">
+                                    <div class="description">
+                                        Are you sure you want to delete this?
+                                    </div>
+                                </div>
+                                <div class="actions">
+                                    <form action="/scoreboard/<%=id%>" method="POST">
+                                        <button class="ui red button" id="nob" type="submit" name="NO" value="true">No</button>
+                                        <button class="ui green right labeled icon button" type="submit" name="Yes" value="true">
+                                            Yes
+                                            <i class="right chevron icon"></i>
+                                        </button>                                
+                                    </form>
+                                </div>
+                            </div>
+                        <% }else { %>
+                            <a href="/scoreboard/<%=term.id%>" class="fluid teal ui button"><%=term.term%></a>
+                        <% } %>
+                        </div>
+                    <% }) %>
+                </div>
+            </div>
+            <div class="ui thirteen wide column">
+                <div class="ui raised segment">
+                <div class="ui two item menu">
+                    <a href="/scoreboard/<%=id%>/add" class="item">Edit</a>
+                    <a href="/scoreboard/<%=id%>/download" download="<%=termName%>.csv" class="yellow item">Download</a>
+                </div>
+                </div>
+                    <table class="ui sortable celled table">
+                            <thead>
+                              <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Score</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            <% if(records.length != 0) {%>
+                            <% var i = 0 %>
+                                <%for(i = 0;i < records.length;i++){%>
+                                    <tr>
+                                        <td data-sort-value="<%=records[i].firstName%>">
+                                            <div class="ui input">
+                                                <input class="student" type="text" name="/scoreboard/<%=id%>/<%=records[i]._id%>/edit/firstName" value="<%=records[i].firstName%>" readonly>
+                                            </div>
+                                        </td>
+                                        <td data-sort-value="<%=records[i].lastName%>">
+                                            <div class="ui input">
+                                                <input class="lastName student" type="text" name="/scoreboard/<%=id%>/<%=records[i]._id%>/edit/lastName>" value="<%=records[i].lastName%>" readonly>
+                                            </div>
+                                        </td>
+                                        <td data-sort-value="<%=records[i].score%>">
+                                            <div class="ui input">
+                                                <input class="score student" type="number" name="/scoreboard/<%=id%>/<%=records[i]._id%>/edit/score" value="<%=records[i].score%>" readonly>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <%}%>
+                            <% }%>
+                            </tbody>
+                            <tfoot>
+                                    <tr>
+                                        <th class="center aligned"><%=i%> Students </th>
+                                        <th class="center aligned"><a class="ui olive button" href="/scoreboard/<%=id%>/add">Edit</a></th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
+                        </table>
+            </div>
+        </div>
+<% include partials/footer %>

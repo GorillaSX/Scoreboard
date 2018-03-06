@@ -1,0 +1,32 @@
+<% include partials/header %>
+      <div class="ui fixed inverted menu">
+          <div class="ui container">
+              <div class="header item">
+                  <i class="browser icon"></i>ScoreBoard
+              </div>
+          </div>
+      </div>
+      <div class="ui main grid container">
+          <div class="three wide column">
+              <div class="ui raised center aligned segments">
+                  <div class="ui center aligned segment">
+                      <a class="ui violet basic button" id="newbt" href="/scoreboard/new">
+                          New
+                      </a>
+                  </div>
+                  <% if(terms.length != 0){ %>
+                      <% terms.forEach(function(term){ %>
+                        <div class="ui center aligned segment term">
+                                <a href="/scoreboard/<%=term.id%>" class="ui teal fluid button sevenp"><%=term.term%></a>
+                        </div>
+                      <% }) %>
+                  <% } %>
+              </div>
+          </div>
+          <div class="ui thirteen wide column">
+              <div class="ui piled segment">
+
+              </div>
+          </div>
+      </div>
+<% include partials/footer %>

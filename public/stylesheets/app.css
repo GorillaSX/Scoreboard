@@ -1,0 +1,92 @@
+i.icon 
+{
+    font-size: 2em;
+}
+i.edit 
+{
+    font-size: inherit;
+}
+i.icon.checkmark 
+{
+    font-size: 1.5em;
+}
+i.icon.remove
+{
+    font-size: 1.5em;
+}
+i.icon.chevron
+{
+    font-size: inherit;
+}
+
+.header
+{
+    font-size: 1.5em;
+}
+
+.main.container 
+{
+    margin-top: 5em;
+}
+.segment.term 
+{
+    padding: 2px;
+}
+
+.sevenp
+{
+    width: 70%;
+}
+.threep
+{
+    width: 30%;
+}
+
+.termEdit.display 
+{
+    display: block;
+}
+
+.termEdit
+{
+    display: none;
+}
+
+.EditSegment
+{
+    display: none;
+}
+
+.EditSegment.display  
+{
+    display: block;
+}
+
+.input.segment 
+{
+    padding: 0;
+}
+
+td.name 
+{
+    padding: 0;
+}
+.input.name 
+{
+    padding: 0;
+}
+input.name
+{
+    border: 0;
+}
+.ui.input .student 
+{
+    border: 0;
+}
+
+#download 
+{
+    padding: 0px;
+}
+
+

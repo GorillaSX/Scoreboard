@@ -1,0 +1,25 @@
+version: '3.3'
+services:
+  scoreboard:
+    container_name: scoreboard
+    restart: always
+    build: ./
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+    networks:
+      - new 
+
+  mongo:
+    image: mongo:3.6.3
+    container_name: mongo
+    volumes: 
+      - ~/data/db:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - new
+
+networks:
+  new:
